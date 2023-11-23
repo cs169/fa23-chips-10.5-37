@@ -1,0 +1,24 @@
+project:
+  name: 'CS169-fa23-37'
+  owner: 'fa23'
+  teamId: '37'
+  identities: {}
+  notifications:
+    email: 'schubertk@berkeley.edu'
+  members:
+    member1:
+      name: 'Kendall'
+      surname: 'Schubert'
+      githubUsername: 'kkscht'
+    member2:
+      name: 'Emma'
+      surname: 'Kang'
+      githubUsername: 'emmkay53'
+    member3:
+      name: 'Ananya'
+      surname: 'Bahugudumbi'
+      githubUsername: 'byte-of-a-bananya'
+    member4:
+      name: 'Naia'
+      surname: 'Johnson'
+      githubUsername: 'muuncakez'
