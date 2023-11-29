@@ -4,6 +4,7 @@ Feature: Search for representatives based on their location
 
 Background: 
   Given I am on the representatives page
+  Then I should see "Search for a Representative"
 
 Scenario: I search for a representative in the zipcode 94720
   When I fill in "address" with "94720"
