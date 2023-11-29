@@ -38,6 +38,13 @@ Rails.application.routes.draw do
                                                                       via: %i[put patch]
         match '/representatives/:representative_id/my_news_item/:id', to:  'my_news_items#destroy',
                                                                       via: [:delete]
+        
     end
+
+
+    # In config/routes.rb
+
+
     get '/search/(:address)' => 'search#search', :as => 'search_representatives'
+    #get '/search/(:address)' => 'search#county', :as => address=alameda&commit=Search
 end

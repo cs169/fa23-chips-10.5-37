@@ -10,6 +10,18 @@
                         Enter a location:
                 .col-md-6
                     = text_field_tag(:address, nil, class: 'form-control')
+            .form-group.row
+                .col-md-4
+                    %label.col-form-label
+                        or
+                .col-md-6
+                    = link_to 'Search on Map', map_search_path, class: 'btn btn-secondary'
+                    = link_to 'Show Representatives by County', show_by_county_representatives_path('123') # Replace '123' with the actual FIPS code
+                    %i.fas.fa-map-marked
+                    Search on Map
+            
 
             .actions
                 = submit_tag 'Search', class: 'btn btn-primary'
+                
+
