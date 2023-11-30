@@ -21,7 +21,7 @@ jobs:
           path: |-
             node_modules
             vendor/bundle
-          key: '${{ runner.os }}-${{ hashFiles(''TODO'') }}'
+          key: '${{ runner.os }}-${{ hashFiles(master.key) }}'
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v3
         with:
