@@ -1,31 +1,35 @@
+.row.mt-5
+  .col-12.col-md-8.offset-md-2.col-lg-6.offset-lg-3
+    .card.mt-4
+      .card-body
+        .text-center
+          %h3= "{@representative.name} Profile Page"
 
-.row.mt-2
-        .col-12.col-md-6.offset-md-3.col-xl-4.offset-xl-4
-                %h3.text-center= representative.name Profile Page
-        .card-body
-                .card-text
-                        %dl.row
-                        %dt.col-sm-3.text-md-right Photo:
-                        %dt.col-sm-9
-                                = image_tag(@representative.photo_url, alt: 'Rep Photo')
-                        %dl.row
-                        %dt.col-sm-3.text-md-right Office:
-                        %dt.col-sm-9
-                                = @representative.office
-                        %dl.row
-                        %dt.col-sm-3.text-md-right Street:
-                        %dt.col-sm-9
-                                = @representative.street
-                        %dl.row
-                        %dt.col-sm-3.text-md-right State:
-                        %dt.col-sm-9
-                                = @representative.state
-                        %dl.row
-                        %dt.col-sm-3.text-md-right Zip:
-                        %dt.col-sm-9
-                                = @representative.zip
-                        %dl.row
-                        %dt.col-sm-3.text-md-right Politcal Party:
-                        %dt.col-sm-9
-                                = @representative.political_party
-                        
+        %dl.row.mt-4
+          %dt.col-sm-4.text-md-right Photo:
+          %dd.col-sm-8
+            = image_tag(@representative.photo_url, alt: 'Rep Photo not Provided', class: 'img-fluid rounded-circle', style: 'max-width: 100px;')
+
+        %dl.row.mt-4
+          %dt.col-sm-4.text-md-right OCD ID:
+          %dd.col-sm-8= @representative.ocdid
+
+        %dl.row.mt-4
+          %dt.col-sm-4.text-md-right office:
+          %dd.col-sm-8= @representative.office
+
+        %dl.row.mt-4
+          %dt.col-sm-4.text-md-right Street:
+          %dd.col-sm-8= @representative.address_street
+
+        %dl.row.mt-4
+          %dt.col-sm-4.text-md-right State:
+          %dd.col-sm-8= @representative.address_state
+
+        %dl.row.mt-4
+          %dt.col-sm-4.text-md-right Zip:
+          %dd.col-sm-8= @representative.address_zip
+
+        %dl.row.mt-4
+          %dt.col-sm-4.text-md-right Political Party:
+          %dd.col-sm-8= @representative.political_party
