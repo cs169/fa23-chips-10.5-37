@@ -42,10 +42,6 @@ Rails.application.routes.draw do
         
     end
 
-
-    # In config/routes.rb
-
-
     get '/search/(:address)' => 'search#search', :as => 'search_representatives'
-    #get '/search/(:address)' => 'search#county', :as => address=alameda&commit=Search
+    
 end

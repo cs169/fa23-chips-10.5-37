@@ -21,11 +21,11 @@ $(document).ready(() => {
             //     const newURL = `/state/${stateSymbol}/county/${countyFIPS}`;
             //     window.location.href = newURL;
             // });
-        const clickCallback = (elem) => {
-            const stateSymbol = elem.attr('data-state-symbol');
-            const countySymbol = elem.attr('data-county-name')
-            window.location.href = `/state/${stateSymbol}/${countySymbol}`;
-        };
+        // const clickCallback = (elem) => {
+        //     const stateSymbol = elem.attr('data-state-symbol');
+        //     const countySymbol = elem.attr('data-county-name')
+        //     window.location.href = `/state/${stateSymbol}/${countySymbol}`;
+        // };
         stateMapUtils.setupEventHandlers(stateMap);
     });
 });
