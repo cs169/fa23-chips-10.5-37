@@ -41,14 +41,18 @@ class Representative < ApplicationRecord
   end
 
   def self.ocdid_title(rep_info, index)
-    ocdid_temp2 = ''
-    title_temp2 = ''
+    # ocdid_temp2 = ''
+    # title_temp2 = ''
+    # rep_info.offices.each do |office|
+    #   if office.official_indices.include? index
+    #     title_temp2 = office.name
+    #     ocdid_temp2 = office.division_id
+    #   end
+    # end
+    # [ocdid_temp2, title_temp2]
     rep_info.offices.each do |office|
-      if office.official_indices.include? index
-        title_temp2 = office.name
-        ocdid_temp2 = office.division_id
-      end
+      return [office.division_id, office.name] if office.official_indices.include? index
     end
-    [ocdid_temp2, title_temp2]
+    ['', '']
   end
 end
