@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/MethodLength, Layout/LineLength
+
 class Representative < ApplicationRecord
   has_many :news_items, dependent: :delete_all
 
@@ -26,13 +28,13 @@ class Representative < ApplicationRecord
       end
 
       rep.update!(
-        address: official.address,
+        address:         official.address,
 
         # other rep info
         political_party: official.party,
-        photo_url: official.photo_url,
-        ocdid: ocdid_temp,
-        title: title_temp
+        photo_url:       official.photo_url,
+        ocdid:           ocdid_temp,
+        title:           title_temp
         # name:            official.name,
         # title:           title_temp,
         # address:         official.address,
@@ -44,27 +46,27 @@ class Representative < ApplicationRecord
         # photo_url:       official.photo_url
 
       )
-      
 
-    #   rep.update!(
+      #   rep.update!(
 
-    #   #address info:
-    #   address: "#{official.address&.line1} #{official.address&.city} #{official.address&.state} #{official.address&.zip}",
+      #   #address info:
+      #   address: "#{official.address&.line1} #{official.address&.city} #{official.address&.state} #{official.address&.zip}",
 
-    #   address_street: official.address&.line1,
-    #   address_city: official.address&.city,
-    #   address_state: official.address&.state,
-    #   address_zip: official.address&.zip,
+      #   address_street: official.address&.line1,
+      #   address_city: official.address&.city,
+      #   address_state: official.address&.state,
+      #   address_zip: official.address&.zip,
 
-    #   # other rep info
-    #   political_party: official.political_party,
-    #   photo_url: official.photo_url,
-    #   ocdid: ocdid_temp,
-    #   title: title_temp
+      #   # other rep info
+      #   political_party: official.political_party,
+      #   photo_url: official.photo_url,
+      #   ocdid: ocdid_temp,
+      #   title: title_temp
 
-    # )
+      # )
       reps.push(rep)
     end
     reps
   end
+  # rubocop:enable Metrics/MethodLength, Layout/LineLength
 end
