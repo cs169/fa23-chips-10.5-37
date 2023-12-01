@@ -8,6 +8,8 @@ jobs:
   # TODO: Environment variables?
   build:
     runs-on: '${{ matrix.os }}'
+    env:
+      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
     strategy:
       matrix:
         os:
@@ -19,7 +21,7 @@ jobs:
           path: |-
             node_modules
             vendor/bundle
-          key: '${{ runner.os }}-${{ hashFiles(''TODO'') }}'
+          key: '${{ runner.os }}-${{ hashFiles(secrets.RAILS_MASTER_KEY) }}'
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v3
         with:
