@@ -9,22 +9,28 @@ class Representative < ApplicationRecord
     rep_info.officials.each_with_index do |official, index|
       ocdid_temp, title_temp = ocdid_title(rep_info, index)
 
-      if Representative.find_by(name: official.name).nil?
-        rep = Representative.create!({ name: official.name, ocdid: ocdid_temp,
-            title: title_temp })
-      else
-        rep = Representative.find_or_initialize_by(name: official.name)
-        rep.update(ocdid: ocdid_temp, title: title_temp)
-      end
+      # if Representative.find_by(name: official.name).nil?
+      #   rep = Representative.create!({ name: official.name, ocdid: ocdid_temp,
+      #       title: title_temp })
+      # else
+      #   rep = Representative.find_or_initialize_by(name: official.name)
+      #   rep.update(ocdid: ocdid_temp, title: title_temp)
+      # end
+      parsedaddress = official.address ? parse_address(official.address) : '' # OG don't delete
 
-      parsedaddress = official.address ? parse_address(official.address) : ''
+      party_temp = official.party
+      photo_temp = official.photo_url || 'No Photo'
+      rep = Representative.find_or_create_by({ name: official.name,
+             ocdid: ocdid_temp, title: title_temp, address: parsedaddress,
+             political_party: party_temp, photo_url: photo_temp })
 
-      rep.update!(
-        address:         parsedaddress, political_party: official.party,
-        photo_url:       official.photo_url || 'No Photo',
-        ocdid:           ocdid_temp,
-        title:           title_temp
-      )
+      # rep.update!(
+      #   address:         parsedaddress,
+      # political_party: official.party,
+      #   photo_url:       official.photo_url || 'No Photo',
+      #   ocdid:           ocdid_temp,
+      #   title:           title_temp
+      # )
 
       reps.push(rep)
     end
