@@ -25,6 +25,25 @@ class Representative < ApplicationRecord
         rep.update(ocdid: ocdid_temp, title: title_temp)
       end
 
+      rep.update!(
+        address: official.address,
+
+        # other rep info
+        political_party: official.party,
+        photo_url: official.photo_url,
+        ocdid: ocdid_temp,
+        title: title_temp
+        # name:            official.name,
+        # title:           title_temp,
+        # address:         official.address,
+        # address_street:  official.address[0].street,
+        # city:            address[:city],
+        # state:           address[:state],
+        # zip:             address[:zip],
+        # political_party: official.party,
+        # photo_url:       official.photo_url
+
+      )
       
 
     #   rep.update!(
@@ -44,15 +63,8 @@ class Representative < ApplicationRecord
     #   title: title_temp
 
     # )
-
       reps.push(rep)
     end
-
     reps
   end
-
-
-  def self.update_address(rep)
-    
-
 end
