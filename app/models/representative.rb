@@ -27,46 +27,32 @@ class Representative < ApplicationRecord
         rep.update(ocdid: ocdid_temp, title: title_temp)
       end
 
-      rep.update!(
-        address:         official.address,
+      parsedaddress = official.address ? parse_address(official.address) : ''
 
-        # other rep info
+      rep.update!(
+        address:         parsedaddress,
         political_party: official.party,
-        photo_url:       official.photo_url,
+        photo_url:       official.photo_url || "No Photo",
         ocdid:           ocdid_temp,
         title:           title_temp
-        # name:            official.name,
-        # title:           title_temp,
-        # address:         official.address,
-        # address_street:  official.address[0].street,
-        # city:            address[:city],
-        # state:           address[:state],
-        # zip:             address[:zip],
-        # political_party: official.party,
-        # photo_url:       official.photo_url
 
       )
 
-      #   rep.update!(
-
-      #   #address info:
-      #   address: "#{official.address&.line1} #{official.address&.city} #{official.address&.state} #{official.address&.zip}",
-
-      #   address_street: official.address&.line1,
-      #   address_city: official.address&.city,
-      #   address_state: official.address&.state,
-      #   address_zip: official.address&.zip,
-
-      #   # other rep info
-      #   political_party: official.political_party,
-      #   photo_url: official.photo_url,
-      #   ocdid: ocdid_temp,
-      #   title: title_temp
-
-      # )
       reps.push(rep)
     end
     reps
   end
-  # rubocop:enable Metrics/MethodLength, Layout/LineLength
+
+  def self.parse_address(addr)
+    fulladdress = "#{addr[0].line1}, "
+    if addr[0].line2 != nil
+      fulladdress += "#{addr[0].line2} "
+    end
+    if addr[0].line3
+      fulladdress += "#{addr[0].line3} "
+    end
+    fulladdress += "#{addr[0].city}, "
+    fulladdress += "#{addr[0].state} #{addr[0].zip}"
+    fulladdress
+  end
 end
