@@ -33,26 +33,21 @@ class Representative < ApplicationRecord
 
   def self.parse_address(addr)
     fulladdress = "#{addr[0].line1}, "
-    fulladdress += "#{addr[0].line2} " unless addr[0].line2.nil?
-    fulladdress += "#{addr[0].line3} " unless addr[0].line3.nil?
+    fulladdress += "#{addr[0].line2} #{addr[0].line3} " unless addr[0].line2.nil?
     fulladdress += "#{addr[0].city}, "
     fulladdress += "#{addr[0].state} #{addr[0].zip}"
     fulladdress
   end
 
   def self.ocdid_title(rep_info, index)
-    # ocdid_temp2 = ''
-    # title_temp2 = ''
-    # rep_info.offices.each do |office|
-    #   if office.official_indices.include? index
-    #     title_temp2 = office.name
-    #     ocdid_temp2 = office.division_id
-    #   end
-    # end
-    # [ocdid_temp2, title_temp2]
+    ocdid_temp2 = ''
+    title_temp2 = ''
     rep_info.offices.each do |office|
-      return [office.division_id, office.name] if office.official_indices.include? index
+      if office.official_indices.include? index
+        title_temp2 = office.name
+        ocdid_temp2 = office.division_id
+      end
     end
-    ['', '']
+    [ocdid_temp2, title_temp2]
   end
 end
