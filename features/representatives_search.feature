@@ -22,5 +22,11 @@ Scenario: There is only 1 Gavin Newsom
   And press "Search"
   Then the table should have 26 rows
 
+Scenario: Search for representative by inputting State Name
+  Given I am on the representatives page
+  And I fill in "address" with "California"
+  And I press "Search"
+  Then I should see "Gavin Newsom"
+
 
 
