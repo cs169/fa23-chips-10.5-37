@@ -7,7 +7,7 @@ class Representative < ApplicationRecord
     reps = []
 
     rep_info.officials.each_with_index do |official, index|
-      ocdid_temp, title_temp = ocdid_title(rep_info, index)
+      ocdid_temp, title_temp = ocdid_title(rep_info, index) || ['', '']
 
       if Representative.find_by(name: official.name).nil?
         rep = Representative.create!({ name: official.name, ocdid: ocdid_temp,
@@ -44,6 +44,5 @@ class Representative < ApplicationRecord
     rep_info.offices.each do |office|
       return [office.division_id, office.name] if office.official_indices.include? index
     end
-    ['', '']
   end
 end
