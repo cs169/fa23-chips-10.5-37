@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop:disable Metrics/MethodLength, Layout/LineLength
-
 class Representative < ApplicationRecord
   has_many :news_items, dependent: :delete_all
 
@@ -9,15 +7,7 @@ class Representative < ApplicationRecord
     reps = []
 
     rep_info.officials.each_with_index do |official, index|
-      ocdid_temp = ''
-      title_temp = ''
-
-      rep_info.offices.each do |office|
-        if office.official_indices.include? index
-          title_temp = office.name
-          ocdid_temp = office.division_id
-        end
-      end
+      ocdid_temp, title_temp = ocdid_title(rep_info, index)
 
       if Representative.find_by(name: official.name).nil?
         rep = Representative.create!({ name: official.name, ocdid: ocdid_temp,
@@ -27,46 +17,37 @@ class Representative < ApplicationRecord
         rep.update(ocdid: ocdid_temp, title: title_temp)
       end
 
-      rep.update!(
-        address:         official.address,
+      parsedaddress = official.address ? parse_address(official.address) : ''
 
-        # other rep info
-        political_party: official.party,
-        photo_url:       official.photo_url,
+      rep.update!(
+        address:         parsedaddress, political_party: official.party,
+        photo_url:       official.photo_url || 'No Photo',
         ocdid:           ocdid_temp,
         title:           title_temp
-        # name:            official.name,
-        # title:           title_temp,
-        # address:         official.address,
-        # address_street:  official.address[0].street,
-        # city:            address[:city],
-        # state:           address[:state],
-        # zip:             address[:zip],
-        # political_party: official.party,
-        # photo_url:       official.photo_url
-
       )
 
-      #   rep.update!(
-
-      #   #address info:
-      #   address: "#{official.address&.line1} #{official.address&.city} #{official.address&.state} #{official.address&.zip}",
-
-      #   address_street: official.address&.line1,
-      #   address_city: official.address&.city,
-      #   address_state: official.address&.state,
-      #   address_zip: official.address&.zip,
-
-      #   # other rep info
-      #   political_party: official.political_party,
-      #   photo_url: official.photo_url,
-      #   ocdid: ocdid_temp,
-      #   title: title_temp
-
-      # )
       reps.push(rep)
     end
     reps
   end
-  # rubocop:enable Metrics/MethodLength, Layout/LineLength
+
+  def self.parse_address(addr)
+    fulladdress = "#{addr[0].line1}, "
+    fulladdress += "#{addr[0].line2} #{addr[0].line3} " unless addr[0].line2.nil?
+    fulladdress += "#{addr[0].city}, "
+    fulladdress += "#{addr[0].state} #{addr[0].zip}"
+    fulladdress
+  end
+
+  def self.ocdid_title(rep_info, index)
+    ocdid_temp2 = ''
+    title_temp2 = ''
+    rep_info.offices.each do |office|
+      if office.official_indices.include? index
+        title_temp2 = office.name
+        ocdid_temp2 = office.division_id
+      end
+    end
+    [ocdid_temp2, title_temp2]
+  end
 end
