@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'google/apis/civicinfo_v2'
+
 class MapController < ApplicationController
   # Render the map of the United States.
   def index
@@ -21,9 +23,10 @@ class MapController < ApplicationController
     handle_state_not_found && return if @state.nil?
 
     @county = get_requested_county @state.id
-    handle_county_not_found && return if @state.nil?
+    handle_county_not_found && return if @county.nil?
 
     @county_details = @state.counties.index_by(&:std_fips_code)
+    redirect_to search_representatives_path address: @county.name
   end
 
   private

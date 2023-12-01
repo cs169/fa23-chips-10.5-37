@@ -8,6 +8,38 @@
                     %svg.d-inline#actionmap-state-counties-view{ version: 1.1, xmlns: 'http://www.w3.org/2000/svg' }
                         %title  Map of #{@state.name} highlighting #{@county.name}
                         /* SVG element will be filled using d3.js and a topojson file. */
+-# haml-lint:disable LineLength
+.row
+    .col-12.col-lg-8.offset-lg-2
+        #actionmap-counties-details
+            .card
+                .card-header#actionmap-counties-reps-details-header
+                    %h3.text-center
+                        %button.btn.btn-link.collapsed{ 'data-toggle': 'collapse',
+                        'data-target': '#actionmap-counties-details-collapse', 'aria-expanded': false,
+                        'aria-controls': 'actionmap-counties-details-collapse' } Representatives in #{@county.name}, #{@state.name}
+                .collapse#actionmap-county-details-collapse{ 'data-parent': '#actionmap-counties-reps-details-header',
+                'aria-labelledby': '#actionmap-counties-reps-details-header' }
+                    .card-body
+                        .table-responsive-md
+                            %table.table.table-striped.table-hover#actionmap-county-reps-table
+                                %caption Table of Representatives in #{@county.name}, #{@state.name}
+                                %thead.thead-dark
+                                    %tr
+                                        %th #
+                                        %th Name
+                                        %th View
+                                %tbody
+                                    - @representatives.each_with_index do |county_rep, _index|
+                                        %tr
+                                            %td= country_rep.name
+                                            %td= county_rep.title
+                                            %td
+                                                = link_to 'View', representative_news_items_path(county_rep.id),
+                                                class: 'btn btn-primary'
+                                                %i.fas.fa-newspaper
+                                                News Articles
+
 #actionmap-info-box
 .d-none#actionmap-info-container{ 'data-counties': @county_details.to_json, 'data-state': @state.to_json,
 'data-state-topojson-file': asset_path("states/#{@state[:symbol].downcase}.topo.json"),

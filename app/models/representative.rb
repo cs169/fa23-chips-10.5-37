@@ -51,4 +51,5 @@ class Representative < ApplicationRecord
 
     reps
   end
+  
 end
