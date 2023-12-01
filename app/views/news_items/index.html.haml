@@ -19,6 +19,7 @@
                             %th Name
                             %th Description
                             %th Posted
+                            %th Issue
                             %th{ colspan: 3 } Links
                     %tbody
                         - @news_items.each_with_index do |item, index|
@@ -40,6 +41,7 @@
                                     = link_to representative_edit_my_news_item_path(item.representative.id, item.id),
                                     class: 'btn btn-success' do
                                         %i.fas.fa-pen &nbsp;Edit
+                                %td= item.issue.presence || ''
                                 %td
                                     = link_to representative_news_item_path(item.representative.id, item.id),
                                     method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' do
