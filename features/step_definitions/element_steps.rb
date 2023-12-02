@@ -13,3 +13,4 @@ Then(/^the table should have (\d+) rows$/) do |expected_rows|
     expect(rows).to eq(expected_rows.to_i)
   end
 end
+

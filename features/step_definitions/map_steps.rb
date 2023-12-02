@@ -20,3 +20,7 @@ end
 When(/^I click on county (.+)$/) do |county|
   visit search_representatives_path(county)
 end
+
+Then(/^I should see the list of reps for "(.*)"$/) do |county|
+  expect(page).to have_content(representatives_for(county))
+end
