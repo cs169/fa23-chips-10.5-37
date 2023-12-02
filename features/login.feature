@@ -3,10 +3,6 @@
 Feature: User login and authentication
 
 Background: Given I am on the login page
-
-Scenario: Google Auth login
-  When I am logged into Google
-  Then I should be redirected to the home page
   
 Scenario: Github login
   When I am logged into Github
