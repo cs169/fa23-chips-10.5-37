@@ -5,7 +5,9 @@ require 'spec_helper'
 
 RSpec.describe User, type: :model do
   describe 'user init method tests' do
-    let(:user1) { described_class.create(first_name: 'Jim', last_name: 'Carrey', provider: 'google_oauth2', uid: '420') }
+    let(:user1) do
+      described_class.create(first_name: 'Jim', last_name: 'Carrey', provider: 'google_oauth2', uid: '420')
+    end
     let(:user2) { described_class.create(first_name: 'Carrey', last_name: 'Jim', provider: 'github', uid: '069') }
 
     it 'returns the full name' do
