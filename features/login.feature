@@ -11,8 +11,13 @@ Scenario: Github login
 Scenario: Visit Profile with Github
   When I am logged into Github
   And I am on the user profile page
+  
 
 Scenario: Login redirected when logged in
   When I am logged into Github
   When I go to the login page
   Then I am on the user profile page
+
+Scenario: Logout
+  When I am on the logout page
+  Then I should see "You have successfully logged out"
