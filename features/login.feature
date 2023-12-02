@@ -17,6 +17,6 @@ Scenario: Visit Profile with Github
   And I am on the user profile page
 
 Scenario: Login redirected when logged in
-  When I am logged into Google
+  When I am logged into Github
   When I go to the login page
   Then I am on the user profile page

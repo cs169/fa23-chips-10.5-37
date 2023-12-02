@@ -26,10 +26,6 @@ require File.expand_path(File.join(File.dirname(__FILE__), '..', 'support', 'sel
 #   click_button('Sign in with #{user[:provider]}')
 # end
 
-When 'I am logged into Google' do
-  User.create(uid: '1', provider: 'google_oauth2', first_name: 'John', last_name: 'Smith', email: 'john@gmail.com')
-end
-
 When 'I am logged into Github' do
   User.create(uid: '11', provider: 'github', first_name: 'John', last_name: 'Smith', email: 'john@gmail.com')
 end
