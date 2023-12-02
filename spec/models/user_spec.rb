@@ -2,8 +2,6 @@
 
 require 'rails_helper'
 require 'spec_helper'
-warnings.filterwarnings('ignore', pronto.warnings.ProntoWarning)
-# ignoring warning since we are checking on 2 seperate auth providers
 
 RSpec.describe User, type: :model do
   describe 'user init method tests' do
