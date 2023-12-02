@@ -3,7 +3,7 @@
 require 'rails_helper'
 require 'spec_helper'
 
-describe Representative do
+RSpec.describe Representative, type: :model do
   it 'creates a valid representative' do
     rep = described_class.new(name: 'First Last', ocdid: 'ocd-division/country:us', title: 'Judge')
     expect(rep).to be_valid
