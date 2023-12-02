@@ -8,4 +8,3 @@ Background:
   Then I fill in "address" with "94720"
   Then I press "Search"
   Then I should see "Gavin Newsom"
-
