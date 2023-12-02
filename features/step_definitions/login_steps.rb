@@ -2,9 +2,8 @@
 
 require 'uri'
 require 'cgi'
-require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "paths"))
-require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "selectors"))
-
+require File.expand_path(File.join(File.dirname(__FILE__), '..', 'support', 'paths'))
+require File.expand_path(File.join(File.dirname(__FILE__), '..', 'support', 'selectors'))
 
 # When(/^Signed in with (.+)$/) do |provider|
 #   OmniAuth.config.test_mode = true
@@ -23,7 +22,7 @@ require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "sel
 #   when 'Github'
 #     user[:provider] = 'github'
 #   end
-#   OmniAuth.config.mock_auth[user[:provider].to_sym] = user 
+#   OmniAuth.config.mock_auth[user[:provider].to_sym] = user
 #   click_button('Sign in with #{user[:provider]}')
 # end
 
