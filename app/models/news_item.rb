@@ -23,7 +23,6 @@ Neutrality", 'Religious Freedom', 'Border Security', 'Minimum Wage',
     response = Net::HTTP.get_response(uri)
     parse_response = JSON.parse(response.body)['articles']
     @top_articles = []
-
     parse_response.each do |article|
       item = NewsItem.new(link: article['url'], title: article['title'],
                           description: article['description'],
