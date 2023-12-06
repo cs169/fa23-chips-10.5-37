@@ -24,3 +24,7 @@ end
 Then(/^I should see the list of reps for "(.*)"$/) do |county|
   expect(page).to have_content(representatives_for(county))
 end
+
+When /I click News Article and arrive at "([^"]*)"$/ do |route|
+  visit route
+end
