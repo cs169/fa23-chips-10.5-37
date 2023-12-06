@@ -49,6 +49,7 @@ class MyNewsItemsController < SessionController
 
     api_key = Rails.application.credentials[:NEWS_API_KEY]
     @top_articles = NewsItem.search_news_api(api_key, params, @representative.name)
+    render :search
   end
 
   private
