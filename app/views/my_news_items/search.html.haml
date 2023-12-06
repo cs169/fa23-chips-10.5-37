@@ -19,4 +19,6 @@
                         %input{ type: 'hidden', name: "articles[#{index}][title]", value: article['title'] }
                         %input{ type: 'hidden', name: "articles[#{index}][description]", value: article['description'] }
                         %input{ type: 'hidden', name: "articles[#{index}][link]", value: article['url'] }
-    
+    .form-group.row
+    .col-sm-12.text-center
+    = submit_tag 'Save', class: 'btn btn-primary'
