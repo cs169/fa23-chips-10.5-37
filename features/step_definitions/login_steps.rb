@@ -28,6 +28,8 @@ require File.expand_path(File.join(File.dirname(__FILE__), '..', 'support', 'sel
 
 When 'I am logged into Github' do
   User.create(uid: '11', provider: 'github', first_name: 'John', last_name: 'Smith', email: 'john@gmail.com')
+  
+
 end
 
 Then 'I should see {string} as the auth provider' do |provider|
