@@ -3,6 +3,7 @@
 class MyNewsItemsController < SessionController
   before_action :set_representative
   before_action :set_representatives_list
+  before_action :set_issues_list
   before_action :set_news_item, only: %i[edit update destroy]
 
   def new
@@ -36,6 +37,10 @@ class MyNewsItemsController < SessionController
                 notice: 'News was successfully destroyed.'
   end
 
+  def search
+    @news_item.NewsItem.where(representative_id: params[:representative_id]).limit(5)
+  end
+
   private
 
   def set_representative
@@ -52,8 +57,12 @@ class MyNewsItemsController < SessionController
     @news_item = NewsItem.find(params[:id])
   end
 
+  def set_issues_list
+    @issues_list = NewsItem.issues_list
+  end
+
   # Only allow a list of trusted parameters through.
   def news_item_params
-    params.require(:news_item).permit(:news, :title, :description, :link, :representative_id)
+    params.require(:news_item).permit(:news, :title, :description, :link, :representative_id, :issue)
   end
 end

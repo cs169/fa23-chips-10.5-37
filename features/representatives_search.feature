@@ -28,5 +28,10 @@ Scenario: Search for representative by inputting State Name
   And I press "Search"
   Then I should see "Gavin Newsom"
 
+Scenario: Address is invalid
+  When I fill in "address" with "chicken"
+  And I press "Search"
+  Then I should see "Invalid address"
+
 
 

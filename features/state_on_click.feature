@@ -3,6 +3,10 @@ Feature: User can click on a county and see a list of representatives
   I want to click on a state to see the counties of this state
   I want to click on a county to see the list of representatives
 
+Scenario: Homepage appearence
+  Given I am on the home page
+  Then I should see "National Map"
+
 Scenario: Click on a state
   Given 50 states exist
   And I am on the home page

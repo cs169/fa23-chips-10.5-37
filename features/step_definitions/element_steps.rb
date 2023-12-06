@@ -13,3 +13,9 @@ Then(/^the table should have (\d+) rows$/) do |expected_rows|
     expect(rows).to eq(expected_rows.to_i)
   end
 end
+
+When('I click the first News Articles link') do
+  within('table#events tbody tr:first-child') do
+    click_link 'News Articles'
+  end
+end
