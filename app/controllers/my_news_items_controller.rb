@@ -44,9 +44,11 @@ class MyNewsItemsController < SessionController
 
   def search
     return unless news_item_params[:representative_id].present? && news_item_params[:issue].present?
+
     search_select
 
-    news_api_key = Rails.application.credentials[:NEWS_API_TOKEN]
+    api_key = Rails.application.credentials[:NEWS_API_TOKEN]
+    top_articles = NewsItem.search_news_api(api_key, params, @representative.name)
   end
 
   private
