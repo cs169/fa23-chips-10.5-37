@@ -41,9 +41,9 @@ Rails.application.routes.draw do
                                                                       via: [:delete]
         get '/representatives/:representative_id/my_news_item/select' => 'my_news_items#select_news',
                                                                      :as => :select_my_news_item
-        get '/representatives/:representative_id/my_news_item/new', to: 'my_news_items#create'
+        get 'my_news_item/search', to: 'my_news_items#search'
                                                                     #=>  :search_my_news_item
-        
+    post 'my_news_items/search', to: 'my_news_items#create'
     end
 
     get '/search/(:address)' => 'search#search', :as => 'search_representatives'

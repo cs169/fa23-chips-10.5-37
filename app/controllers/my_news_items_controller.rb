@@ -57,12 +57,12 @@ class MyNewsItemsController < SessionController
     # @top_articles = api_call
     # puts @top_articles
     
-    #return unless news_item_params[:representative_id].present? && news_item_params[:issue].present?
+    return unless news_item_params[:representative_id].present? && news_item_params[:issue].present?
 
-    #search_select
+    search_select
     
     api_key = Rails.application.credentials[:NEWS_API_KEY]
-    @top_articles = NewsItem.search_news_api(api_key, params, @representative.name)
+    @top_articles = NewsItem.search_news_api(api_key, params, @searched_rep.name)
     if @top_articles.blank?
       set_issues_list
       render :edit
