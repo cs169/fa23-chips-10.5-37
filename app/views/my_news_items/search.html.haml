@@ -1,8 +1,7 @@
-= form_tag representative_new_my_news_item_path, method: :post do
+= form_tag representative_new_my_news_item_path(params[:representative_id]), method: :post do
     .table-responsive-md
         %table.table.table-striped.table-hover
             %h1.text-center Top 5 news articles for #{@representative[:name]}
-            %caption Top 5 News Items
             %thead.thead-dark
                 %tr
                     %th select
