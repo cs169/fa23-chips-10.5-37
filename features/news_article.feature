@@ -12,3 +12,4 @@ Scenario: Click on Add News Article
   When I follow "Add News Article"
   Then I should see "Edit news article"
 
+

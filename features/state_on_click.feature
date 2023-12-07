@@ -19,7 +19,6 @@ Scenario: Click on Alameda county
   When I click on county "Alameda"
   Then the table should have 26 rows
 
-
 Scenario: Click on SF county
   Given I am on the home page
   When I click "CA" on national map page
