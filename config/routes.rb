@@ -42,10 +42,12 @@ Rails.application.routes.draw do
         get '/representatives/:representative_id/my_news_item/select' => 'my_news_items#select_news',
                                                                      :as => :select_my_news_item
         get 'my_news_item/search', to: 'my_news_items#search'
-                                                                    #=>  :search_my_news_item
-        post 'my_news_items/search', to: 'my_news_items#create'
+                                                                    #=>  :search_my_news_item        
+        #  match '/representatives/:representative_id/my_news_item/new', to:  'my_news_items#new',
+        #                                                               via: [:post]
     end
-
+    post 'my_news_items/search', to: 'my_news_items#search', as: :search_my_news_items
+    get 'my_news_item/index', to: 'my_news_items#index', as: :index_my_news_articles
     get '/search/(:address)' => 'search#search', :as => 'search_representatives'
     
 end
