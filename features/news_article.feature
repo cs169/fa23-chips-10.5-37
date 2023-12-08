@@ -1,4 +1,7 @@
-Feature: Issues on News article 
+Feature: Issues on News Article (and my news tests)
+
+Background:
+  Given there are representatives with names "John Cena" and "Dwayne Johnson"
 
 Scenario: Click on Add News Article
   Given I am on the login page
@@ -11,5 +14,6 @@ Scenario: Click on Add News Article
   Then I should see "Listing News Articles for "
   When I follow "Add News Article"
   Then I should see "Edit news article"
+
 
 

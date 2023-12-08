@@ -39,7 +39,7 @@
                                     class: 'btn btn-info' do
                                         %i.fas.fa-eye &nbsp;Info
                                 %td
-                                    = link_to representative_edit_my_news_item_path(item.representative.id, item.id),
+                                    = link_to representative_edit_my_news_item_path(item.searched_rep.id, item.id),
                                     class: 'btn btn-success' do
                                         %i.fas.fa-pen &nbsp;Edit
                                 %td= item.issue.presence || ''

@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-Given(/^a rep named "(.*?)" does exist in the database$/) do |name|
+Given(/^a rep "(.*?)" does exist in the database$/) do |name|
   Representative.find_or_create_by!(name: name)
 end
 
-Given(/^a rep named "(.*?)" does not exist in the database$/) do |name|
+Given(/^a rep "(.*?)" doesn't exist in the database$/) do |name|
   rep = Representative.where(name: name)
   rep.destroy_all
 end
@@ -16,6 +16,14 @@ end
 Then(/^I should see the rep "(.*?)" in the database 1 time$/) do |name|
   expect(Representative.where(name: name).count).to eq(1)
 end
+
+#And (/^the rep with name "([^"]*)" should have the id "([^"]*)"$/) do |name, id|
+#rep = Representative.find_by(name: name)
+#
+#  expect(rep).to be_present
+#  expect(rep.index).to eq(id)
+#end
+
 
 Then(/^I should see the name "(.*?)"$/) do |name|
   expect(page).to have_content("Name: #{name}")
@@ -35,10 +43,10 @@ When(/^I visit the reps page$/) do
 end
 
 When(/^I add the rep "(.*?)"$/) do |name|
-  @name = OpenStruct.new(name: name)
-  @info = OpenStruct.new(officials: @name, offices: ["somewhere"])
+  name = OpenStruct.new(name: name)
+  info = OpenStruct.new(officials: name, offices: ["somewhere"])
 
-  Representative.civic_api_to_representative_params(@info)
+  Representative.civic_api_to_representative_params(info)
 end
 
 
