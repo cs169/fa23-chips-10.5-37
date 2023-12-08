@@ -1,36 +1,26 @@
-.container
-    %h1 Top Articles
-    %p
-        Representative: #{Representative.find(params[:news_item][:representative_id]).name}
-    %p
-        Issue: #{params[:news_item][:issue]}
-
-    = form_with url: representative_new_my_news_item_path, method: :post do |f|
-        %p
-            Select an article:
-        %ul
-            - @top_articles.each_with_index do |article, index|
-                %li
-                    = f.radio_button :selected_article, index
-                    %label{ for: "selected_article_#{index}" }
-                        %strong Title:
-                        = article['title']
-                        %br/
-                        %strong Link:
-                        %small= article['url']
-                        %br/
-                        %strong Description:
-                        %p= article['description']
-                        = hidden_field_tag "articles[#{index}][title]", article['title']
-                        = hidden_field_tag "articles[#{index}][description]", article['description']
-                        = hidden_field_tag "articles[#{index}][url]", article['url']
-        
-        .actions
-            = f.submit 'Save', class: 'btn btn-primary'
-
-    .col-12.col-md-6.offset-md-3.col-xl-4.offset-xl-4
-        .clearfix.mt-3
-            .float-right
-                = link_to representative_news_items_path(params[:news_item][:representative_id]), class: 'btn btn-info' do
-                    View news articles
-                    %i.fas.fa-arrow-right
+= form_tag representative_new_my_news_item_path(params[:news_item][:representative_id]), method: :post do
+    .table-responsive-md
+        %table.table.table-striped.table-hover
+            %h1.text-center Edit News Articles
+            %h2.text-center Representative: #{Representative.find(params[:news_item][:representative_id]).name}
+            %h3.text-center Issue: #{params[:news_item][:issue]}
+            %thead.thead-dark
+                %tr
+                    %th Select
+                    %th Title
+                    %th Description
+                    %th Link
+            %tbody
+                - @top_articles.each_with_index do |article, index|
+                    %tr
+                        %td
+                            %input{ type: 'radio', name: 'selected_article_index', value: index, required: true }
+                        %td= article['title']
+                        %td= article['description']
+                        %td= link_to article['source'], article['url'], target: '_blank'
+                        %input{ type: 'hidden', name: "articles[#{index}][title]", value: article['title'] }
+                        %input{ type: 'hidden', name: "articles[#{index}][description]", value: article['description'] }
+                        %input{ type: 'hidden', name: "articles[#{index}][link]", value: article['url'] }
+    .form-group.row
+    .col-sm-12.text-center
+    = submit_tag 'Save', class: 'btn btn-primary'
