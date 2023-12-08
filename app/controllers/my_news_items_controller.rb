@@ -16,13 +16,17 @@ class MyNewsItemsController < SessionController
 
   def create
     @news_item = NewsItem.new(news_item_params)
-    # @representatve = Representative.find(params[:representative_id])
+    puts params[:selected_article_index]
+    selected_news_index = params[:selected_news_index].to_i
+    
+    # @representative = Representative.find(params[:representative_id])
     # @news_item = @representative.news_items.build(news_item_params)
-    # @news_item.title = params[:news_item][:title]
-    # @news_item.issue = params[:issue]
+    # @top_articles.title = params[:news_item][:title]
+    # @top_articles.description = 
+    # @top_articles.issue = params[:issue] 
 
     if @news_item.save
-      @representative.news_items << @news_item
+      # @representative.news_items << @news_item
       redirect_to representative_news_item_path(@representative, @news_item),
                   notice: 'News item was successfully created.'
     else
@@ -57,21 +61,15 @@ class MyNewsItemsController < SessionController
     # puts api_call
     # @top_articles = api_call
     # puts @top_articles
-    puts news_item_params
-    puts news_item_params[:representative_id]
+   
     return unless news_item_params[:representative_id].present? && news_item_params[:issue].present?
 
-    search_select
-    puts news_item_params[:representative_id]
-    name_2 = Representative.find_by(news_item_params[:representative_id])[:name]
-    puts name_2
-
-    puts @searched_rep
+    @news_item = NewsItem.new
     api_key = Rails.application.credentials[:NEWS_API_KEY]
-    @top_articles = NewsItem.search_news_api(api_key, params, @representative.name)
-    if @top_articles.blank?
+    @top_articles = NewsItem.search_news_api(api_key, params)
+    if @top_articles.empty?
       set_issues_list
-      render :show
+      redirect_to representative_news_items_path, alert: 'No articles found for this issue.'
     else
       render :search
     end

@@ -18,21 +18,21 @@ Neutrality", 'Religious Freedom', 'Border Security', 'Minimum Wage',
      'Equal Pay']
   end
 
-  def self.search_news_api(api_key, params, _name)
+  def self.search_news_api(api_key, params)
     selected_name = Representative.find(params[:news_item][:representative_id]).name
-    puts selected_name
-
+    
     uri = URI("https://newsapi.org/v2/everything?q=#{selected_name}%20#{params[:issue]}&language=en&sortBy=relevancy&pageSize=5&apiKey=#{api_key}")
-    puts uri
     response = Net::HTTP.get_response(uri)
     parse_response = JSON.parse(response.body)['articles']
     @top_articles = []
-    parse_response.each do |article|
-      item = NewsItem.create!(link: article['url'], title: article['title'],
-                              description: article['description'],
-                              representative_id: params[:representative_id],
+    parse_response.map do |article|
+      news_item = NewsItem.new(title: article['title'],
+                              description: article['description'], 
+                              link: article['url'],
+                              representative_id: params[:news_item][:representative_id],
                               issue: params[:news_item][:issue])
-      @top_articles.push(item)
+      @top_articles.push(news_item)
+      puts params[:articles][:selected_article_index]
     end
     puts @top_articles
     @top_articles

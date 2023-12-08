@@ -43,7 +43,7 @@ Rails.application.routes.draw do
                                                                      :as => :select_my_news_item
         get 'my_news_item/search', to: 'my_news_items#search'
                                                                     #=>  :search_my_news_item
-    post 'my_news_items/search', to: 'my_news_items#create'
+        post 'my_news_items/search', to: 'my_news_items#create'
     end
 
     get '/search/(:address)' => 'search#search', :as => 'search_representatives'
