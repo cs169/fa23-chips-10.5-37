@@ -30,6 +30,10 @@ When 'I am logged into Github' do
   User.create(uid: '11', provider: 'github', first_name: 'John', last_name: 'Smith', email: 'john@gmail.com')
 end
 
+When 'I am logged into Google' do
+  User.create(uid: '12', provider: 'google_oauth2', first_name: 'Jane', last_name: 'Doe', email: 'jane@gmail.com')
+end
+
 Then 'I should see {string} as the auth provider' do |provider|
   name = provider == 'Google' ? 'Google Test User' : 'GitHub Test User'
   expect(page).to have_content(name)

@@ -33,5 +33,3 @@ Scenario: Address is invalid
   And I press "Search"
   Then I should see "Invalid address"
 
-
-
