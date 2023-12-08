@@ -7,7 +7,6 @@ class MyNewsItemsController < SessionController
   before_action :set_representatives_list
   before_action :set_issues_list
   before_action :set_news_item, only: %i[edit update destroy]
-  
 
   def new
     @news_item = NewsItem.new
@@ -18,10 +17,10 @@ class MyNewsItemsController < SessionController
   def create
     @news_item = NewsItem.new(news_item_params)
     # @representatve = Representative.find(params[:representative_id])
-	  # @news_item = @representative.news_items.build(news_item_params)
-	  # @news_item.title = params[:news_item][:title]
-	  # @news_item.issue = params[:issue]
-    
+    # @news_item = @representative.news_items.build(news_item_params)
+    # @news_item.title = params[:news_item][:title]
+    # @news_item.issue = params[:issue]
+
     if @news_item.save
       @representative.news_items << @news_item
       redirect_to representative_news_item_path(@representative, @news_item),
@@ -49,7 +48,7 @@ class MyNewsItemsController < SessionController
   def search_select
     @searched_issue = params[:news_item][:issue]
     @searched_rep = params[:news_item][:representative]
-    #@searched_rep = Representative.find(news_item_params[:representative_id])
+    # @searched_rep = Representative.find(news_item_params[:representative_id])
   end
 
   def search
