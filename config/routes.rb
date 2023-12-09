@@ -29,6 +29,7 @@ Rails.application.routes.draw do
     resources :representatives, only: [:index]
     resources :representatives do
         resources :news_items, only: %i[index show]
+        resources :my_news_items, only: [:new, :search, :create]
         get '/representatives/:representative_id/my_news_item/new' => 'my_news_items#new',
             :as                                                    => :new_my_news_item
         match '/representatives/:representative_id/my_news_item/new', to:  'my_news_items#search',
@@ -41,13 +42,16 @@ Rails.application.routes.draw do
                                                                       via: [:delete]
         get '/representatives/:representative_id/my_news_item/select' => 'my_news_items#select_news',
                                                                      :as => :select_my_news_item
-        get 'my_news_item/search', to: 'my_news_items#search'
+        get '/representatives/:representative_id/my_news_item/search', to: 'my_news_items#search'
                                                                     #=>  :search_my_news_item        
-        #  match '/representatives/:representative_id/my_news_item/new', to:  'my_news_items#new',
+        get 'my_news_item/index', to: 'my_news_items#index', as: :index_my_news_articles
+
+                                                                    #  match '/representatives/:representative_id/my_news_item/new', to:  'my_news_items#new',
         #                                                               via: [:post]
     end
-    post 'my_news_items/search', to: 'my_news_items#search', as: :search_my_news_items
+    post '/representatives/:representative_id/my_news_items/search', to: 'my_news_items#search', as: :search_my_news_item
     get 'my_news_item/index', to: 'my_news_items#index', as: :index_my_news_articles
+
     get '/search/(:address)' => 'search#search', :as => 'search_representatives'
     
 end

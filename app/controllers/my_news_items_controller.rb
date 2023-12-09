@@ -10,19 +10,23 @@ class MyNewsItemsController < SessionController
 
   def new
     @news_item = NewsItem.new
+    # search_select
   end
 
   def edit; end
 
-  def create
-    @news_item = NewsItem.new(news_item_params)
-    if @news_item.save
-      # @representative.news_items << @news_item
-      redirect_to representative_news_item_path(@representative, @news_item),
-                  notice: 'News item was successfully created.'
-    else
-      render :new, error: 'An error occurred when creating the news item.'
-    end
+  def create 
+    
+      @news_item = NewsItem.new(news_item_params) 
+           
+      if @news_item.save
+        # @representative.news_items << @news_item
+        redirect_to representative_news_item_path(@representative, @news_item),
+                    notice: 'News item was successfully created.'
+      else
+        render :new, error: 'An error occurred when creating the news item.'
+      end
+    
   end
 
   def update
@@ -42,8 +46,8 @@ class MyNewsItemsController < SessionController
 
   def search_select
     @searched_issue = params[:news_item][:issue]
-    @searched_rep = params[:news_item][:representative]
-    @representative = @searched_rep
+    @searched_rep = params[:news_item][:representative_id]
+    # @representative = @searched_rep
     # @searched_rep = Representative.find(news_item_params[:representative_id])
   end
 
@@ -55,8 +59,8 @@ class MyNewsItemsController < SessionController
     # puts @top_articles
    
     return news_item_params unless news_item_params[:representative_id].present? && news_item_params[:issue].present?
-    
-    @news_item = NewsItem.new
+    search_select
+    #@news_item = NewsItem.new(representative: params[:news_item][:representative])
 
     api_key = Rails.application.credentials[:NEWS_API_KEY]
     @top_articles = NewsItem.search_news_api(api_key, params)
@@ -87,9 +91,10 @@ class MyNewsItemsController < SessionController
   private
 
   def set_representative
-    @representative = Representative.find(
-      params[:representative_id]
-    )
+    # @representative = Representative.find(
+    #   params[:representative_id]
+    # )
+    @representative = Representative.find(params[:representative_id])
   end
 
   def set_representatives_list

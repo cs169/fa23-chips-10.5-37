@@ -1,4 +1,4 @@
-= form_tag representative_new_my_news_item_path(params[:news_item][:representative_id]), method: :post do
+= form_tag "/representatives/#{params[:news_item][:representative_id]}/my_news_item/new", method: :post do
     .table-responsive-md
         %table.table.table-striped.table-hover
             %h1.text-center Edit News Articles

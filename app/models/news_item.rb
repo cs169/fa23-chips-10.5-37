@@ -20,7 +20,8 @@ Neutrality", 'Religious Freedom', 'Border Security', 'Minimum Wage',
 
   def self.search_news_api(api_key, params)
     selected_name = Representative.find(params[:news_item][:representative_id]).name
-    
+    puts params[:news_item][:representative_id]
+    puts params[:news_item][:issue]
     uri = URI("https://newsapi.org/v2/everything?q=#{selected_name}%20#{params[:issue]}&language=en&sortBy=relevancy&pageSize=5&apiKey=#{api_key}")
     response = Net::HTTP.get_response(uri)
     parse_response = JSON.parse(response.body)['articles']
