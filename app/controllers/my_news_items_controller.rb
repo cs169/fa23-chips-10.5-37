@@ -37,8 +37,19 @@ class MyNewsItemsController < SessionController
                 notice: 'News was successfully destroyed.'
   end
 
+  def search_select
+    @searched_issue = news_item_params[:issue]
+    @searched_rep = Representative.find(news_item_params[:representative_id])
+  end
+
   def search
-    @news_item.NewsItem.where(representative_id: params[:representative_id]).limit(5)
+    return unless news_item_params[:representative_id].present? && news_item_params[:issue].present?
+
+    search_select
+
+    api_key = Rails.application.credentials[:NEWS_API_KEY]
+    @top_articles = NewsItem.search_news_api(api_key, params, @representative.name)
+    render :search
   end
 
   private

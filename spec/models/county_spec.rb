@@ -12,6 +12,5 @@ RSpec.describe County, type: :model do
         expect(county.std_fips_code).to eq('777')
       end
     end
-    # can county be out of range?
   end
 end

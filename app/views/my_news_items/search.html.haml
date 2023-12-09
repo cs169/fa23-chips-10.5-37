@@ -1,0 +1,25 @@
+= form_tag representative_new_my_news_item_path, method: :post do
+    .table-responsive-md
+        %table.table.table-striped.table-hover
+            %h1.text-center Top 5 news articles for #{@representative[:name]}
+            %caption Top 5 News Items
+            %thead.thead-dark
+                %tr
+                    %th select
+                    %th Title
+                    %th Description
+                    %th Link
+            %tbody
+                - @top_articles.each_with_index do |article, index|
+                    %tr
+                        %td
+                            %input{ type: 'radio', name: 'selected_article_index', value: index, required: true }
+                        %td= article['title']
+                        %td= article['description']
+                        %td= link_to article['source'], article['url'], target: '_blank', rel: 'noopener'
+                        %input{ type: 'hidden', name: "articles[#{index}][title]", value: article['title'] }
+                        %input{ type: 'hidden', name: "articles[#{index}][description]", value: article['description'] }
+                        %input{ type: 'hidden', name: "articles[#{index}][link]", value: article['url'] }
+    .form-group.row
+    .col-sm-12.text-center
+    = submit_tag 'Save', class: 'btn btn-primary'
