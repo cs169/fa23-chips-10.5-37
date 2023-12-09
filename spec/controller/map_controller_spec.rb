@@ -22,6 +22,7 @@ RSpec.describe MapController, type: :controller do
     it 'assigns states and fips_code' do
       get :index
       expect(assigns(:states)).to eq([@state])
+      # https://stackoverflow.com/questions/4663074/in-ruby-what-does-mean-and-how-does-it-work ---> =>
       expect(assigns(:states_by_fips_code)).to eq({ @state.std_fips_code => @state })
     end
   end
@@ -35,6 +36,7 @@ RSpec.describe MapController, type: :controller do
     it 'assigns state and county_details' do
       get :state, params: { state_symbol: @state.symbol }
       expect(assigns(:state)).to eq(@state)
+      # https://api.rubyonrails.org/classes/Enumerable.html ---> index_by()
       expect(assigns(:county_details)).to eq(@state.counties.index_by(&:std_fips_code))
     end
 
