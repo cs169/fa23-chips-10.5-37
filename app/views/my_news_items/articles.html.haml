@@ -17,11 +17,11 @@
                             %input{ type: 'radio', id: 'selected_article_index', value: index, required: true }
                         %td= article['title']
                         %td= article['description']
-                        %td= link_to article['source']['name'], article['url'], target: '_blank'
+                        %td= link_to article['source']['name'], article['url'], target: '_blank', rel: 'noopener'
                         %input{ type: 'hidden', name: "articles[#{index}][title]", value: article['title'] }
                         %input{ type: 'hidden', name: "articles[#{index}][description]", value: article['description'] }
                         %input{ type: 'hidden', name: "articles[#{index}][link]", value: article['url'] }
     .form-group.row
-    
+
     .col-sm-12.text-center
     = submit_tag 'Save', class: 'btn btn-primary'
