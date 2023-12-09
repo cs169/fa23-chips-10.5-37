@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-require 'rails_helper'
-
-RSpec.describe NewsItem, type: :model do
-  
-=======
 # frozen_string_literal: true
 
 require 'rails_helper'
@@ -31,5 +25,4 @@ RSpec.describe NewsItem, type: :model do
 
     # test for to find news for a rep not in system?
   end
->>>>>>> a8edf3850690bb7fc9c93b6a8d809b3882ec27d6
 end
