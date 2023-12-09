@@ -1,0 +1,26 @@
+= form_tag "/representatives/#{params[:news_item][:representative_id]}/my_news_item/new", method: :post do
+    .table-responsive-md
+        %table.table.table-striped.table-hover
+            %h1.text-center Edit News Articles
+            %h2.text-center Representative: #{Representative.find(params[:news_item][:representative_id]).name}
+            %h3.text-center Issue: #{params[:news_item][:issue]}
+            %thead.thead-dark
+                %tr
+                    %th Select
+                    %th Title
+                    %th Description
+                    %th Link
+            %tbody
+                - @top_articles.each_with_index do |article, index|
+                    %tr
+                        %td
+                            %input{ type: 'radio', name: 'selected_article_index', value: index, required: true }
+                        %td= article['title']
+                        %td= article['description']
+                        %td= link_to article['source'], article['url'], target: '_blank'
+                        %input{ type: 'hidden', name: "articles[#{index}][title]", value: article['title'] }
+                        %input{ type: 'hidden', name: "articles[#{index}][description]", value: article['description'] }
+                        %input{ type: 'hidden', name: "articles[#{index}][link]", value: article['url'] }
+    .form-group.row
+    .col-sm-12.text-center
+    = submit_tag 'Save', class: 'btn btn-primary'
