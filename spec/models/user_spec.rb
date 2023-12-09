@@ -8,7 +8,10 @@ RSpec.describe User, type: :model do
     let(:user1) do
       described_class.create(first_name: 'Jim', last_name: 'Carrey', provider: 'google_oauth2', uid: '420')
     end
-    let(:user2) { described_class.create(first_name: 'Carrey', last_name: 'Jim', provider: 'github', uid: '069') }
+
+    let(:user2) do
+      described_class.create(first_name: 'Carrey', last_name: 'Jim', provider: 'github', uid: '069')
+    end
 
     it 'returns the full name and authority provider' do
       expect(user1.name).to eq('Jim Carrey')
@@ -23,7 +26,6 @@ RSpec.describe User, type: :model do
     #   expect(user2.auth_provider).to eq('Github')
     # end
   end
-  # rubocop:disable RSpec/ExampleLength
 
   describe 'find the user with the uid' do
     it 'finds github and google from UID' do
@@ -35,8 +37,6 @@ RSpec.describe User, type: :model do
       found = described_class.find_google_user('456')
       expect(found).to eq(goo_user)
     end
-    # rubocop:enable RSpec/ExampleLength
-
     # it 'finds google with UID' do
     #   goo_user = described_class.create(provider: 'google_oauth2', uid: '456')
     #   found = described_class.find_google_user('456')

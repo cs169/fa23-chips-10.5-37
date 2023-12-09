@@ -11,11 +11,11 @@ class NewsItem < ApplicationRecord
   end
 
   def self.issues_list
-    ['Free Speech', 'Immigration', 'Terrorism', "Social Security and
-Medicare", 'Abortion', 'Student Loans', 'Gun Control', 'Unemployment',
-     'Climate Change', 'Homelessness', 'Racism', 'Tax Reform', "Net
-Neutrality", 'Religious Freedom', 'Border Security', 'Minimum Wage',
-     'Equal Pay']
+    ['Free Speech', 'Immigration', 'Terrorism', 'Social Security and Medicare',
+     'Abortion', 'Student Loans', 'Gun Control', 'Unemployment',
+     'Climate Change', 'Homelessness', 'Racism', 'Tax Reform',
+     'Net Neutrality', 'Religious Freedom', 'Border Security',
+     'Minimum Wage', 'Equal Pay']
   end
 
   def self.search_news_api(api_key, params, name)

@@ -17,13 +17,12 @@ Then(/^I should see the rep "(.*?)" in the database 1 time$/) do |name|
   expect(Representative.where(name: name).count).to eq(1)
 end
 
-#And (/^the rep with name "([^"]*)" should have the id "([^"]*)"$/) do |name, id|
-#rep = Representative.find_by(name: name)
+# And (/^the rep with name "([^"]*)" should have the id "([^"]*)"$/) do |name, id|
+# rep = Representative.find_by(name: name)
 #
 #  expect(rep).to be_present
 #  expect(rep.index).to eq(id)
-#end
-
+# end
 
 Then(/^I should see the name "(.*?)"$/) do |name|
   expect(page).to have_content("Name: #{name}")
@@ -37,16 +36,14 @@ Then(/^I should see the rep "(.*?)" in the database$/) do |name|
   expect(Representative.where(name: name).count).to be_present
 end
 
-#possibly wrong path type:
+# possibly wrong path type:
 When(/^I visit the reps page$/) do
   visit representatives_path
 end
 
 When(/^I add the rep "(.*?)"$/) do |name|
   name = OpenStruct.new(name: name)
-  info = OpenStruct.new(officials: name, offices: ["somewhere"])
+  info = OpenStruct.new(officials: name, offices: ['somewhere'])
 
   Representative.civic_api_to_representative_params(info)
 end
-
-

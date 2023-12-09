@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-require 'rails_helper'
-
-RSpec.describe County, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
-=======
 # frozen_string_literal: true
 
 require 'rails_helper'
@@ -18,7 +12,5 @@ RSpec.describe County, type: :model do
         expect(county.std_fips_code).to eq('777')
       end
     end
-    # can county be out of range?
   end
->>>>>>> a8edf3850690bb7fc9c93b6a8d809b3882ec27d6
 end
